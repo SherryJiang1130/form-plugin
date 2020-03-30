@@ -58,27 +58,48 @@ export default {
       h:createElement,
       formOptions,
       formRule,
-      formValue,
       options,
       labelWidth,
-      formList:formList
+      formList:Object.assign(formList,formValue),
+      _this:this
      }
     return formJSX(prop)
+  },
+  methods:{
+    getVal(){
+      return this.formList
+    },
+    validate(){
+      return this.$refs.formList.validate()
+    },
+    changeInputHandle(val,item){
+      console.log(val,item)
+    },
+    changeSelectHandle(key,val,item){
+      console.log(key,val,item)
+    },
+    input(){
+
+    } 
   }
 }
 
 
-function formJSX({h,formOptions,formRule,formList,labelWidth}) {
+function formJSX({h,formOptions,options,formRule,formList,labelWidth,_this}) {
   return ( <Form  label-position="right"  ref="formList"  class="iview_form_components"  rules={formRule} model={formList} label-width={labelWidth===0?null:labelWidth}>
     < Row>
-    {formOptions.map((ele,index)=>renderItem(h,ele,index,formList))}
+    {formOptions.map((ele,index)=>renderItem(h,ele,index,formList,options,_this))}
     </Row> </Form> )
 }
 
-function renderItem(h, item,index,formList) {
+function renderItem(h, item,index,formList,options,_this) {
   let renderComponent = item.type === 'row' ? 'RowFormItem' : 'ColFormItem'
-
- // return h(renderComponent,{key:item.key+'_'+index,props:{formItemData:item,formList:formList,itemList:item.rowList}})
- return (<renderComponent key={item.key+'_'+index} form-item-data={item} form-list={formList} item-list={item.rowList}/>)
+ return (<renderComponent key={item.key+'_'+index} 
+ form-item-data={item} form-list={formList} 
+ item-list={item.rowList} 
+ select-options={options}
+  on-change-input-handle={(val,item)=>_this.changeInputHandle(val,item)}
+  on-change-select={(key,val,item)=>_this.changeSelectHandle(key,val,item)}
+  />)
 }
 </script>

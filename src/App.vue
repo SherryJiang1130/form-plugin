@@ -1,17 +1,18 @@
 <template>
   <div id="app">
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <HelloWorld />
+    <Wrap />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import 'iview/dist/styles/iview.css'
+import Wrap from './components/Wrap.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Wrap
   }
 }
 </script>
