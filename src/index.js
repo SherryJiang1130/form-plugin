@@ -1,10 +1,12 @@
-import { install } from './install'
-export default class IviewForm {
-    static install: () => void;
-    static version: string;
-    constructor(){
+import Forms from './components/from/Forms'
 
+let IviewForm = {}
+IviewForm.install = function (Vue) {
+    Vue.prototype.$alert = function (text) {
+        console.log(text)
+        alert(text)
     }
+    Vue.component('vForms', Forms)
 }
-IviewForm.install = install
-IviewForm.version = '__VERSION__'
+
+export default IviewForm;

@@ -1,18 +1,19 @@
 <template>
-  <div class="hello">
-    <v-form :form-options='formOptions' :form-rule='formRule' :form-value='formValue' :options='selectOpts'  ref='vForm' />
+  <div class="wrap">
+    <v-forms :form-options='formOptions' :form-rule='formRule' :form-value='formValue' :options='selectOpts'  ref='vForm'></v-forms>
     <Button @click='submit'>submit</Button>
   </div>
 </template>
-
 <script>
-import Forms from './from/Forms.vue'
+
+
 import {Button} from "iview"
 export default {
   name: 'Wrap',
-  components:{'v-form':Forms,Button},
+  components:{Button},
   methods:{
        submit(){
+        // this.$alert('嗨，欢迎一起来学习')
          const vform=this.$refs.vForm
          vform.validate().then(validate=>{
            if(validate){
